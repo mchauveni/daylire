@@ -1,10 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import loufokerie from "./components/loufokerie";
 import { useEffect, useState } from 'react';
 import ApiHandler from './apihandler';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Image, ScrollView, Button, StyleSheet, Text, View } from 'react-native';
 import { NativeRouter, Route, Routes, Link } from "react-router-native";
-import Loufokerie from './components/loufokerie';
+import Loufokerie from './components/loufokerie/loufokerie';
 
 const Home = () => {
 	const [loufokeries, setLoufokeries] = useState(null);
@@ -19,17 +18,20 @@ const Home = () => {
 
 	return (
 		<>
-			<Text>Toutes les loufokeriesss !!</Text>
-			{
-				loufokeries ?
-					loufokeries.map((loufokerie) => (
-						<Link key={loufokerie.id} style={styles.loufokeriewrapper} to={"/" + loufokerie.id}>
-							<Text style={styles.loufokerietitle}>{loufokerie.titre_loufokerie}</Text>
-						</Link>
-					)) : (
-						<Text>Chargement...</Text>
-					)
-			}
+			<Image style={styles.logotype} source={require("./assets/logotype.png")}></Image>
+			<ScrollView style={styles.scrollView} contentContainerStyle={styles.contentScrollView}>
+				<Text>Mesdames, Messieurs et autres Menestres, ayez l'honneur de lire les récits complètement crazyyy d'autres contributeurs loufoques</Text>
+				{
+					loufokeries ?
+						loufokeries.map((loufokerie) => (
+							<Link key={loufokerie.id} style={styles.loufokeriewrapper} to={"/" + loufokerie.id}>
+								<Text style={styles.loufokerietitle}>{loufokerie.titre_loufokerie}</Text>
+							</Link>
+						)) : (
+							<ActivityIndicator size="large" color="#8531da"></ActivityIndicator>
+						)
+				}
+			</ScrollView>
 		</>
 	)
 }
@@ -55,10 +57,21 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'flex-start',
 	},
-	loufokeriewrapper: {
-		margin: 8,
-		display: "flex",
+	logotype: {
 		width: "90%",
+		height: 170,
+		resizeMode: "contain"
+	},
+	scrollView: {
+		alignSelf: "stretch"
+	},
+	contentScrollView: {
+		padding: 16,
+		gap: 16
+	},
+	loufokeriewrapper: {
+		display: "flex",
+		alignSelf: "stretch",
 		backgroundColor: '#8531da',
 		padding: 16,
 		borderRadius: 8,
