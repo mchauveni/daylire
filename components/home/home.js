@@ -25,10 +25,13 @@ const Home = props => {
                         <Link key={loufokerie.id} style={homeStyles.loufokeriewrapper} to={("/" + loufokerie.id)}>
                             <View style={homeStyles.loufokerieContent}>
                                 <View>
-                                    <Text style={homeStyles.loufokerieDate}>Du {new Date(loufokerie.date_debut_loufokerie).toLocaleDateString("fr-FR")} au {new Date(loufokerie.date_fin_loufokerie).toLocaleDateString("fr-FR")}</Text>
+                                    <Text style={homeStyles.textWhite}>Du {new Date(loufokerie.date_debut_loufokerie).toLocaleDateString("fr-FR")} au {new Date(loufokerie.date_fin_loufokerie).toLocaleDateString("fr-FR")}</Text>
                                     <Text style={homeStyles.loufokerieTitle}>{loufokerie.titre_loufokerie}</Text>
                                 </View>
-                                <View><Image style={homeStyles.loufokLike} source={props.likes.includes(loufokerie.id) ? require("../../assets/liked.png") : require("../../assets/not_liked.png")}></Image></View>
+                                <View style={homeStyles.likeWrapper}>
+                                    <Text style={homeStyles.textWhite}>{loufokerie.nb_jaime}</Text>
+                                    <Image style={homeStyles.loufokLike} source={props.likes.includes(loufokerie.id) ? require("../../assets/liked.png") : require("../../assets/not_liked.png")}></Image>
+                                </View>
                             </View>
                         </Link>
                     )) : (
