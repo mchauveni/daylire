@@ -4,46 +4,38 @@ import { NativeRouter, Route, Routes } from "react-router-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loufokerie from './components/loufokerie/loufokerie';
 import Home from './components/home/home';
+import ApiHandler from './apihandler';
 
 
 
 export default function App() {
-	/**
-	 * likes: {
-	 * 		like[];
-	 * }
-	 * 
-	 * like: {
-	 * 		loufokId: number,
-	 * 		liked: bool
-	 * }
-	 */
 	const [likes, setLikes] = useState([]);
 
 	const getLocalLikes = async () => {
 		let retrievedLikes = JSON.parse(await AsyncStorage.getItem("likes"));
-
 		if (!retrievedLikes) {
-			await AsyncStorage.setItem("likes", JSON.stringify([20]));
+			await AsyncStorage.setItem("likes", JSON.stringify([]));
 			setLikes([])
 		} else {
 			setLikes(retrievedLikes)
 		}
 	}
 
-	const handleLike = (loufokerieId) => {
-		console.log(likes.includes(loufokerieId));
+	const handleLike = async (loufokerieId) => {
+		let likeArray = likes;
 		if (likes.includes(loufokerieId)) {
-			setLikes(likes.splice(likes.indexOf(loufokerieId), 1));
+			const response = await ApiHandler.postLike(JSON.stringify({ id: loufokerieId, addLike: false }));
+			likeArray.splice(likeArray.indexOf(loufokerieId), 1)
+			setLikes(likeArray);
 		} else {
-			setLikes(likes.push(loufokerieId))
+			const response = await ApiHandler.postLike(JSON.stringify({ id: loufokerieId, addLike: true }));
+			likeArray.push(loufokerieId)
+			setLikes(likeArray)
 		}
 	}
 
 	useEffect(() => {
-		console.log("===== CURRENT LIKE ARRAY =====");
-		console.log(likes);
-		console.log("==============================");
+		AsyncStorage.setItem("likes", JSON.stringify(likes));
 	}, [likes])
 
 	useEffect(() => {

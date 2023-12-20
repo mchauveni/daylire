@@ -28,7 +28,7 @@ const Home = props => {
                                     <Text style={homeStyles.loufokerieDate}>Du {new Date(loufokerie.date_debut_loufokerie).toLocaleDateString("fr-FR")} au {new Date(loufokerie.date_fin_loufokerie).toLocaleDateString("fr-FR")}</Text>
                                     <Text style={homeStyles.loufokerieTitle}>{loufokerie.titre_loufokerie}</Text>
                                 </View>
-                                <View><Image style={homeStyles.loufokLike} source={props.likes.some((like) => like == loufokerie.id) ? require("../../assets/liked.png") : require("../../assets/not_liked.png")}></Image></View>
+                                <View><Image style={homeStyles.loufokLike} source={props.likes.includes(loufokerie.id) ? require("../../assets/liked.png") : require("../../assets/not_liked.png")}></Image></View>
                             </View>
                         </Link>
                     )) : (

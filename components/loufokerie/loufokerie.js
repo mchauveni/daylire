@@ -7,13 +7,18 @@ import { styles } from "./styles";
 const Loufokerie = props => {
     const [loufokerie, setLoufokerie] = useState(null);
     const { loufokId } = useParams();
+    const [isLiked, setIsLiked] = useState(props.likes.includes(loufokId));
 
     const fetchLoufokerie = async () => {
         setLoufokerie(await ApiHandler.fetchLoufokerie(loufokId));
     }
 
+    const handleLikePress = () => {
+        props.handleLike(loufokerie.id);
+        setIsLiked(!isLiked);
+    }
+
     useEffect(() => {
-        console.log(props.likes);
         fetchLoufokerie();
     }, [])
 
@@ -29,8 +34,8 @@ const Loufokerie = props => {
                                     <Text style={styles.optionButtonText}>Retour</Text>
                                 </View>
                             </Link>
-                            <Pressable style={styles.optionButton} onPress={() => { props.handleLike(loufokerie.id) }}>
-                                <Image style={styles.loufokLike} source={props.likes.some((like) => like == loufokerie.id) ? require("../../assets/liked.png") : require("../../assets/not_liked.png")}></Image>
+                            <Pressable style={styles.optionButton} onPress={() => { handleLikePress() }}>
+                                <Image style={styles.loufokLike} source={isLiked ? require("../../assets/liked.png") : require("../../assets/not_liked.png")}></Image>
                             </Pressable>
                         </View>
                         <Text style={styles.loufokerietitle}>{loufokerie.titre_loufokerie}</Text>
