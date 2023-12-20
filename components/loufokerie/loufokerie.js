@@ -13,6 +13,7 @@ const Loufokerie = props => {
     }
 
     useEffect(() => {
+        console.log(props.likes);
         fetchLoufokerie();
     }, [])
 
@@ -28,16 +29,11 @@ const Loufokerie = props => {
                                     <Text style={styles.optionButtonText}>Retour</Text>
                                 </View>
                             </Link>
-                            <Pressable style={styles.optionButton}>
-                                <Text style={styles.optionButtonText}>Like</Text>
+                            <Pressable style={styles.optionButton} onPress={() => { props.handleLike(loufokerie.id) }}>
+                                <Image style={styles.loufokLike} source={props.likes.some((like) => like == loufokerie.id) ? require("../../assets/liked.png") : require("../../assets/not_liked.png")}></Image>
                             </Pressable>
                         </View>
-
-                        {loufokerie ? (
-                            <Text style={styles.loufokerietitle}>{loufokerie.titre_loufokerie}</Text>
-                        ) : (
-                            <Text style={styles.loufokerietitle}>Loading</Text>
-                        )}
+                        <Text style={styles.loufokerietitle}>{loufokerie.titre_loufokerie}</Text>
                     </View>
                     <ScrollView style={styles.scrollView} contentContainerStyle={styles.contentScrollView}>
                         <View style={styles.contribWrapper}>
@@ -57,7 +53,7 @@ const Loufokerie = props => {
             ) : (
                 <ActivityIndicator size="large" color="#8531da"></ActivityIndicator>
             )}
-        </View >
+        </View>
     )
 }
 

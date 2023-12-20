@@ -22,18 +22,6 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         marginBottom: 16
     },
-    scrollView: {
-        display: "flex",
-        flexDirection: "column",
-        padding: 16,
-    },
-    contentScrollView: {
-        gap: 16,
-        paddingBottom: 32
-    },
-    returnLink: {
-        alignSelf: "flex-start",
-    },
     optionButton: {
         padding: 8,
         paddingHorizontal: 16,
@@ -52,10 +40,26 @@ export const styles = StyleSheet.create({
         fontSize: 48,
         color: "#8531da",
     },
+    scrollView: {
+        display: "flex",
+        flexDirection: "column",
+        padding: 16,
+    },
+    contentScrollView: {
+        gap: 16,
+        paddingBottom: 32
+    },
+    returnLink: {
+        alignSelf: "flex-start",
+    },
+    loufokLike: {
+        height: 32,
+        width: 32,
+        resizeMode: "contain"
+    },
     image: {
         width: 24,
         height: 24,
-        tintColor: "#ffffff",
         resizeMode: "contain"
     },
     contribWrapper: {
