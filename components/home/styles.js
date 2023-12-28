@@ -33,12 +33,17 @@ export const homeStyles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center"
     },
+    likeWrapper: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 4,
+    },
     loufokLike: {
         height: 32,
         width: 32,
         resizeMode: "contain"
     },
-    loufokerieDate: {
+    textWhite: {
         color: "#fff"
     },
     loufokerieTitle: {

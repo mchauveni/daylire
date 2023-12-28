@@ -24,13 +24,13 @@ export default function App() {
 	const handleLike = async (loufokerieId) => {
 		let likeArray = likes;
 		if (likes.includes(loufokerieId)) {
-			const response = await ApiHandler.postLike(JSON.stringify({ id: loufokerieId, addLike: false }));
 			likeArray.splice(likeArray.indexOf(loufokerieId), 1)
 			setLikes(likeArray);
+			await ApiHandler.postLike(JSON.stringify({ id: loufokerieId, addLike: false }));
 		} else {
-			const response = await ApiHandler.postLike(JSON.stringify({ id: loufokerieId, addLike: true }));
 			likeArray.push(loufokerieId)
 			setLikes(likeArray)
+			await ApiHandler.postLike(JSON.stringify({ id: loufokerieId, addLike: true }));
 		}
 	}
 

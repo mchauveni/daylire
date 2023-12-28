@@ -7,7 +7,7 @@ import { styles } from "./styles";
 const Loufokerie = props => {
     const [loufokerie, setLoufokerie] = useState(null);
     const { loufokId } = useParams();
-    const [isLiked, setIsLiked] = useState(props.likes.includes(loufokId));
+    const [isLiked, setIsLiked] = useState(props.likes.includes(parseInt(loufokId)));
 
     const fetchLoufokerie = async () => {
         setLoufokerie(await ApiHandler.fetchLoufokerie(loufokId));
